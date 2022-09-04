@@ -1,2 +1,6 @@
-package model;public enum Team {
+package model;
+
+public enum Team {
+    A,
+    B,
 }

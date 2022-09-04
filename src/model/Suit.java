@@ -1,2 +1,8 @@
-package model;public enum Suit {
+package model;
+
+enum Suit {
+    Heart,
+    Diamonds,
+    Clubs,
+    Spades
 }
