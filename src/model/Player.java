@@ -3,10 +3,12 @@ package model;
 import java.util.ArrayList;
 
 public class Player {
+    private final int id;
     private final Team team;
     private int cardsTop = 0;
     private Card[] cards;
-    public Player(Team team){
+    public Player(Team team, int id){
+        this.id = id;
         this.team = team;
     }
 
@@ -28,5 +30,13 @@ public class Player {
             }
         }
         return cards[cardsTop++];
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 }

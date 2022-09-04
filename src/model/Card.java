@@ -15,4 +15,8 @@ public class Card {
     public Suit getSuit() {
         return suit;
     }
+
+    public int getScoreValue() {
+        return value.ordinal();
+    }
 }
