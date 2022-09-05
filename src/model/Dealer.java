@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Dealer {
     Deck deck = new Deck();
 
@@ -7,7 +9,7 @@ public class Dealer {
         deck.reset();
     }
 
-    public Card[] dealHand(){
+    public ArrayList<Card> dealHand(){
         return deck.getCards(8);
     }
 

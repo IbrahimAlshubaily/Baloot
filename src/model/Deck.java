@@ -15,10 +15,11 @@ class Deck {
         Collections.shuffle(deck);
     }
 
-    public Card[] getCards(int numCards) {
-        Card[] cards = new Card[numCards];
+    public ArrayList<Card> getCards(int numCards) {
+        ArrayList<Card> cards = new ArrayList<>();
         while (numCards > 0 && top < deck.size()){
-            cards[--numCards] = deck.get(top++);
+            cards.add( deck.get(top++));
+            numCards--;
         }
         return cards;
     }

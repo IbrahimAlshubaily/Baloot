@@ -1,42 +1,56 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Player {
+    private static final Comparator<Card> COMPARATOR = Comparator.comparing(Card::getAscendingRank);
     private final int id;
     private final Team team;
-    private int cardsTop = 0;
-    private Card[] cards;
+    private ArrayList<Card> cards;
+
     public Player(Team team, int id){
         this.id = id;
         this.team = team;
     }
-
-    public void setCards(Card[] cards) {
-        this.cards = cards;
-    }
+    public void setCards(ArrayList<Card> cards) { this.cards = cards; }
+    public int getId() { return id; }
+    public Team getTeam() { return team; }
 
     public Card play(ArrayList<Card> floor) {
-        if (floor.size() > 0) {
-            Suit floorSuit = floor.get(0).getSuit();
-            int selectedInd = cardsTop;
-            while (selectedInd < cards.length && cards[selectedInd].getSuit() != floorSuit){
-                selectedInd++;
+        Card selectedCard = selectCard(floor);
+        cards.remove(selectedCard);
+        return selectedCard;
+    }
+
+    private Card selectCard(ArrayList<Card> floor) {
+        Card selectedCard;
+        if (floor.size() == 0){
+            selectedCard = Collections.max(cards, COMPARATOR);
+
+        } else if (hasMatchingCards(floor.get(0).getSuit())) {
+            Suit firstCardSuit = floor.get(0).getSuit();
+            List<Card> validCards = cards.stream()
+                    .filter(card -> card.getSuit() == firstCardSuit)
+                    .collect(Collectors.toList());
+
+            selectedCard = Collections.max(validCards, COMPARATOR);
+            Card maxPlacedCard = floor.stream().filter(card -> card.getSuit() == firstCardSuit).max(COMPARATOR).get();
+            if (selectedCard.getAscendingRank() < maxPlacedCard.getAscendingRank()) {
+                selectedCard = Collections.min(validCards, COMPARATOR);
             }
-            if (selectedInd < cards.length){
-                Card tmp = cards[cardsTop];
-                cards[cardsTop] = cards[selectedInd];
-                cards[selectedInd] = tmp;
-            }
+
+        }else {
+            selectedCard = Collections.min(cards, COMPARATOR);
         }
-        return cards[cardsTop++];
+        return selectedCard;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public Team getTeam() {
-        return team;
+    private boolean hasMatchingCards(Suit suit) {
+        for (Card card : cards){
+            if (card.getSuit() == suit)
+                return true;
+        }
+        return false;
     }
 }
