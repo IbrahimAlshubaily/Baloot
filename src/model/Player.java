@@ -43,7 +43,6 @@ public class Player {
         }else {
             selectedCard = Collections.min(cards, COMPARATOR);
         }
-        cards.remove(selectedCard);
         return selectedCard;
     }
 
