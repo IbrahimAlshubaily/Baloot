@@ -1,6 +1,8 @@
 package model;
 
-public class Card {
+
+public class Card{
+
     private final Suit suit;
     private final Value value;
     public Card(Suit suit, Value value) {
@@ -16,7 +18,10 @@ public class Card {
         return suit;
     }
 
-    public int getScoreValue() {
+    public int getAscendingRank() {
         return value.ordinal();
+    }
+    public int getScoreValue(){
+        return value.getScore();
     }
 }
