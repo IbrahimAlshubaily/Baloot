@@ -13,7 +13,21 @@ public class Player {
         this.id = id;
         this.team = team;
     }
-    public void setCards(List<Card> cards) { this.cards = cards; }
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+        sortCards();
+    }
+
+    private void sortCards() {
+        cards.sort((c1, c2) -> {
+            int result = c1.getSuit().compareTo(c2.getSuit());
+            if (result == 0){
+                result = c2.getAscendingRank() - c1.getAscendingRank();
+            }
+            return result;
+        });
+    }
+
     public int getId() { return id; }
     public Team getTeam() { return team; }
 
@@ -52,5 +66,17 @@ public class Player {
                 return true;
         }
         return false;
+    }
+
+    public void printCards() {
+        for (int i = 0; i < cards.size(); i++){
+            System.out.println(i + " : " + cards.get(i).getRepr());
+        }
+    }
+
+    public Card getCard(int selectionInd) {
+        Card selectedCard = cards.get(selectionInd);
+        cards.remove(selectionInd);
+        return selectedCard;
     }
 }
