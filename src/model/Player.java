@@ -7,13 +7,13 @@ public class Player {
     private static final Comparator<Card> COMPARATOR = Comparator.comparing(Card::getAscendingRank);
     private final int id;
     private final Team team;
-    private ArrayList<Card> cards;
+    private List<Card> cards;
 
     public Player(Team team, int id){
         this.id = id;
         this.team = team;
     }
-    public void setCards(ArrayList<Card> cards) { this.cards = cards; }
+    public void setCards(List<Card> cards) { this.cards = cards; }
     public int getId() { return id; }
     public Team getTeam() { return team; }
 
