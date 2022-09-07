@@ -1,15 +1,13 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Dealer {
     Deck deck = new Deck();
-
     public void resetDeck() {
         deck.reset();
     }
-
-    public ArrayList<Card> dealHand(){
+    public List<Card> dealHand(){
         return deck.getCards(8);
     }
 

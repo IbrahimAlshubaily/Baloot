@@ -13,11 +13,9 @@ public class Card{
     public String getRepr() {
         return suit+ " "+ value;
     }
-
     public Suit getSuit() {
         return suit;
     }
-
     public int getAscendingRank() {
         return value.ordinal();
     }
